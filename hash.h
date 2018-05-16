@@ -2,31 +2,28 @@
 
 #define HASH_H_
 
-struct node 
-{
-    struct node* next;
-    struct node* prev;
-    char key[50];
-    int hash;
-};
-
-typedef struct node node;
-
+#include "list.h"
 
 struct hashtable
 {
     int size;
-    node* heads;
+    int counter;
+
+    list* heads;
 };
 
 typedef struct hashtable hashtable;
 
+int dump ( const hashtable* current, const char* message );
 hashtable* constructor ( int size );
 int destructor ( hashtable* current );
-int insert ( hashtable* current, char* key );
-int delete ( hashtable* current, char* key );
-node* search ( hashtable* current, char* key );
-int hashfunction ( char* key );
+list* new_head ( hashtable* current, int hash, const char* key );
+int add ( hashtable* current, const char* key );
+int delete_key ( hashtable* current, const char* key );
+node* search ( hashtable* current, const char* key );
+int calc ( const char* key );
+list* find_hash ( hashtable* current, int hash );
+int print ( const hashtable* current );
 
 
 

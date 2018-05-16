@@ -235,6 +235,3 @@ int dump ( const hashtable* current, const char* message )
     
     return 0;    
 }
-}
-
-

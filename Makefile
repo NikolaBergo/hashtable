@@ -1,6 +1,16 @@
-main.o: main.c
-	gcc -c -o main.o main.c
-hash.o: hash.c
-	gcc -c -o hash.o hash.c
-hash: main.o hash.o
-	gcc -o hash main.o hash.o
+#Makefile
+
+OBJS=main.o hash.o list.o
+HEADERS=hash.h list.h
+
+all:hash
+
+hash:$(OBJS)
+        gcc -fprofile-arcs -ftest-coverage $^ -o $@
+
+%.o:%.c $(HEADERS)
+        gcc -c -fprofile-arcs -ftest-coverage $<
+
+clean:
+        rm -f *.o
+        rm -f hash
